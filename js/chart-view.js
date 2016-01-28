@@ -1,56 +1,4 @@
 $(function () {
-  var fileList = [
-    "neuburger liquid milk_1_2016一月28_1107.xls",
-    "neuburger liquid milk_2_2016一月28_1108.xls",
-    "neuburger liquid milk_3_2016一月28_1108.xls",
-    "neuburger liquid milk-塑料_1_2016一月28_1111.xls",
-    "neuburger liquid milk-塑料_2_2016一月28_1111.xls",
-    "neuburger liquid milk-塑料_3_2016一月28_1111.xls",
-    "neuburger liquid milk-塑料_4_2016一月28_1111.xls",
-    "neuburger liquid milk-塑料_5_2016一月28_1111.xls",
-    "伊利奶粉_1_2016一月28_1056.xls",
-    "伊利奶粉_2_2016一月28_1057.xls",
-    "伊利奶粉_3_2016一月28_1057.xls",
-    "伊利奶粉_4_2016一月28_1057.xls",
-    "伊利奶粉_5_2016一月28_1057.xls",
-    "土豆淀粉超市_1_2016一月28_1052.xls",
-    "土豆淀粉超市_2_2016一月28_1052.xls",
-    "土豆淀粉超市_3_2016一月28_1052.xls",
-    "土豆淀粉超市_4_2016一月28_1052.xls",
-    "土豆淀粉超市_5_2016一月28_1053.xls",
-    "地沟油_1_2016一月28_1115.xls",
-    "地沟油_2_2016一月28_1115.xls",
-    "地沟油_3_2016一月28_1115.xls",
-    "地沟油_4_2016一月28_1115.xls",
-    "地沟油_5_2016一月28_1116.xls",
-    "奶粉_1_2016一月28_1046.xls",
-    "奶粉_2_2016一月28_1046.xls",
-    "奶粉_3_2016一月28_1046.xls",
-    "奶粉_4_2016一月28_1046.xls",
-    "奶粉_5_2016一月28_1046.xls",
-    "果珍_1_2016一月28_1131.xls",
-    "果珍_2_2016一月28_1131.xls",
-    "果珍_3_2016一月28_1131.xls",
-    "果珍_4_2016一月28_1131.xls",
-    "果珍_5_2016一月28_1131.xls",
-    "植物油_1_2016一月28_1116.xls",
-    "植物油_2_2016一月28_1116.xls",
-    "植物油_3_2016一月28_1116.xls",
-    "植物油_4_2016一月28_1116.xls",
-    "植物油_5_2016一月28_1116.xls",
-    "橘子_1_2016一月28_1124.xls",
-    "橘子_2_2016一月28_1124.xls",
-    "橘子_3_2016一月28_1125.xls",
-    "橘子_4_2016一月28_1125.xls",
-    "橘子_5_2016一月28_1125.xls",
-    "橙子_1_2016一月28_1117.xls",
-    "橙子_2_2016一月28_1118.xls",
-    "橙子_3_2016一月28_1118.xls",
-    "橙子_4_2016一月28_1118.xls",
-    "橙子_5_2016一月28_1118.xls",
-    "法国咖啡_1_2016一月28_1101.xls",
-    "法国咖啡_2_2016一月28_1101.xls",
-  ];
   // Empty chart
   var chart = new Highcharts.Chart({
     chart: {
@@ -79,10 +27,8 @@ $(function () {
     }
   });
 
-  $.each(fileList, function(index, filename) {
-    var filepath = URI("/data/").filename(filename);
-    Papa.parse(filepath.toString(), {
-      download: true,
+  function addData(csvFile) {
+    Papa.parse(csvFile, {
       header: true,
       dynamicTyping: true,
       comments: "'",
@@ -98,13 +44,20 @@ $(function () {
           }
         })
         chart.addSeries({
-          name: filename,
+          name: csvFile.name,
           data: data,
           marker: {
             enabled: false
           },
         });
       }
+    });
+  }
+
+  $("#csv-add").click(function() {
+    csvFiles = $("#csv-files")[0].files;
+    $.each(csvFiles, function(index, file) {
+      addData(file);
     });
   });
 });
