@@ -79,19 +79,6 @@ $(function () {
     }
   });
 
-  // Parse querystring
-  //var parsedURI = URI.parse(window.location.href);
-  //var parsedQuery = URI.parseQuery(parsedURI.query);
-
-  // Get csv file names
-  //var csvFiles = parsedQuery.csv;
-  //if (csvFiles === undefined)
-    //return;
-  //else if (typeof csvFiles === "string")
-    //csvFiles = [csvFiles];
-
-  // Iterate over csv files and insert serials
-  //$.each(csvFiles, function(index, filename) {
   $.each(fileList, function(index, filename) {
     var filepath = URI("/data/").filename(filename);
     Papa.parse(filepath.toString(), {
