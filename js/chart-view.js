@@ -60,4 +60,8 @@ $(function () {
       addData(file);
     });
   });
+
+  $("#clear").click(function() {
+    location.reload();
+  });
 });
