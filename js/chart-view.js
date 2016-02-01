@@ -19,12 +19,26 @@ $(function () {
         text: 'Wavelength'
       },
       min: 900,
+      crosshair: true,
     },
     yAxis: {
       title: {
         text: 'Absorbance'
       },
-    }
+    },
+    tooltip: {
+      formatter: function() {
+        var s = '<b>' + this.x + ' mm</b>';
+
+        $.each(this.points, function() {
+          s += '<br/>' + this.series.name + ': ' +
+            this.y;
+        });
+
+        return s;
+      },
+      shared: true,
+    },
   });
 
   function addData(csvFile) {
