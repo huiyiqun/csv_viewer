@@ -11,7 +11,7 @@ $(function () {
     xAxis: {
       labels: {
         formatter: function() {
-          return this.value + ' mm'
+          return this.value + ' mm';
         }
       },
       units: 'mm',
