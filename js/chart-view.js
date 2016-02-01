@@ -11,10 +11,10 @@ $(function () {
     xAxis: {
       labels: {
         formatter: function() {
-          return this.value + ' mm';
+          return this.value + ' nm';
         }
       },
-      units: 'mm',
+      units: 'nm',
       title: {
         text: 'Wavelength'
       },
@@ -28,7 +28,7 @@ $(function () {
     },
     tooltip: {
       formatter: function() {
-        var s = '<b>' + this.x + ' mm</b>';
+        var s = '<b>' + this.x + ' nm</b>';
 
         $.each(this.points, function() {
           s += '<br/>' + this.series.name + ': ' +
